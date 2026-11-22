@@ -81,6 +81,15 @@
       "label": "remove .gitignore",
       "type": "shell",
       "command": "if (Test-Path -LiteralPath .gitignore) { Remove-Item -LiteralPath .gitignore }"
+    },
+    {
+      "label": "run tests",
+      "group": "test",
+      "type": "shell",
+      "command": "python -m unittest discover -v",
+      "problemMatcher": [
+        "$python"
+      ]
     }
   ]
 }
