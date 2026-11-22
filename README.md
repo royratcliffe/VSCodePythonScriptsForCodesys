@@ -142,8 +142,9 @@ the release tag must not already point to a different commit.
 ## VS Code tasks
 
 The included `tasks.json` contains tasks for extraction, updates, formatting,
-version updates, release creation, and hook installation. The task commands
-expect this repository's utility scripts to remain in the workspace root.
+version updates, release creation, test execution, and hook installation. The
+task commands expect this repository's utility scripts to remain in the
+workspace root.
 
 ## Tests
 
