@@ -10,6 +10,7 @@ exported project objects and Structured Text in Git repositories.
 - Update matching CODESYS project objects from extracted Structured Text.
 - Watch a project directory and refresh extracted source when objects change.
 - Keep staged `.object` JSON files consistently formatted.
+- Dump CANopen remote-device SDO write lists in generated C/C++ style.
 - Derive the project version from reachable Git release tags.
 - Create GitHub releases from the version stored in the CODESYS project.
 - Reformat all project objects with a PowerShell script.
@@ -40,6 +41,9 @@ those arguments.
 ## Usage
 
 Run commands from the repository root.
+
+For use with a CODESYS project, place this repository's contents in the
+project's `.vscode` directory. The examples below use that deployment layout.
 
 ### Extract Structured Text
 
@@ -86,14 +90,15 @@ Preview changes with:
 ### Format staged objects before commits
 
 The `pre-commit` script formats staged `.object` files and restages them. Enable
-it with:
+it for a project using this deployment layout with:
 
 ```powershell
 git config core.hooksPath .
 ```
 
 The hook file must use LF line endings. The `.gitattributes` configuration
-enforces LF for repository text files.
+enforces LF for repository text files. If Python is unavailable, the hook skips
+object formatting.
 
 ### Update the project version
 
@@ -143,8 +148,16 @@ the release tag must not already point to a different commit.
 
 The included `tasks.json` contains tasks for extraction, updates, formatting,
 version updates, release creation, test execution, and hook installation. The
-task commands expect this repository's utility scripts to remain in the
-workspace root.
+tasks expect the utility scripts to remain in `.vscode`.
+
+### Dump CANopen SDO writes
+
+Pass one or more CODESYS CANopen `.object` files to print their `SDO List`
+entries in download order:
+
+```powershell
+python .vscode\dump_sdo_writes.py path\to\device.object
+```
 
 ## Tests
 
