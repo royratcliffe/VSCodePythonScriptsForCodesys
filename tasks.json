@@ -86,7 +86,7 @@
       "label": "run tests",
       "group": "test",
       "type": "shell",
-      "command": "python -m unittest discover -v",
+      "command": "python -m unittest discover -v -s .vscode -t .",
       "problemMatcher": [
         "$python"
       ]
