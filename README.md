@@ -32,7 +32,7 @@ By default, the scripts expect this layout:
 ```text
 project/             CODESYS .object files
 st/                  Extracted .st files
-*.py                 Utility scripts
+.vscode/             VS Code configuration and utility scripts
 ```
 
 You can override the project and output directories on commands that support
@@ -48,8 +48,8 @@ project's `.vscode` directory. The examples below use that deployment layout.
 ### Extract Structured Text
 
 ```powershell
-python extract_st.py
-python extract_st.py path\to\project --output-dir path\to\st
+python .vscode\extract_st.py
+python .vscode\extract_st.py path\to\project --output-dir path\to\st
 ```
 
 Add `--stdout` to print extracted source without writing `.st` files.
@@ -57,8 +57,8 @@ Add `--stdout` to print extracted source without writing `.st` files.
 ### Update project objects
 
 ```powershell
-python update_st.py --dry-run
-python update_st.py
+python .vscode\update_st.py --dry-run
+python .vscode\update_st.py
 ```
 
 The update script matches `.st` files to project objects and validates section
@@ -67,8 +67,8 @@ labels before changing any object file.
 ### Watch for changes
 
 ```powershell
-python watch_extract_st.py
-python watch_extract_st.py project --output-dir st --poll-interval 0.5 --debounce 1
+python .vscode\watch_extract_st.py
+python .vscode\watch_extract_st.py project --output-dir st --poll-interval 0.5 --debounce 1
 ```
 
 Press `Ctrl+C` to stop the watcher.
@@ -78,13 +78,13 @@ Press `Ctrl+C` to stop the watcher.
 Format every valid JSON object beneath `project`:
 
 ```powershell
-.\Format-ObjectFiles.ps1 -Path project
+.\.vscode\Format-ObjectFiles.ps1 -Path project
 ```
 
 Preview changes with:
 
 ```powershell
-.\Format-ObjectFiles.ps1 -Path project -WhatIf
+.\.vscode\Format-ObjectFiles.ps1 -Path project -WhatIf
 ```
 
 ### Format staged objects before commits
@@ -93,7 +93,7 @@ The `pre-commit` script formats staged `.object` files and restages them. Enable
 it for a project using this deployment layout with:
 
 ```powershell
-git config core.hooksPath .
+git config core.hooksPath .vscode
 ```
 
 The hook file must use LF line endings. The `.gitattributes` configuration
@@ -113,8 +113,8 @@ vMajor.Minor.Patch.Build
 The unprefixed forms are also accepted.
 
 ```powershell
-python update_version.py --dry-run
-python update_version.py
+python .vscode\update_version.py --dry-run
+python .vscode\update_version.py
 ```
 
 The script requires full history and a reachable release tag. It writes the
@@ -132,13 +132,13 @@ gh auth login
 Preview the release command without publishing or requiring a clean checkout:
 
 ```powershell
-python create_release.py --dry-run
+python .vscode\create_release.py --dry-run
 ```
 
 Create the release:
 
 ```powershell
-python create_release.py
+python .vscode\create_release.py
 ```
 
 The checkout must be clean, the project information file must be tracked, and
@@ -164,5 +164,5 @@ python .vscode\dump_sdo_writes.py path\to\device.object
 Run the unit tests with:
 
 ```powershell
-python -m unittest discover -v
+python -m unittest discover -v -s .vscode -t .
 ```
