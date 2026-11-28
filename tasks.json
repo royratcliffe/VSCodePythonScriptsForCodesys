@@ -15,7 +15,7 @@
     {
       "label": "install pre-commit hook",
       "type": "shell",
-      "command": "git config core.hooksPath scripts",
+      "command": "git config core.hooksPath .vscode",
       "problemMatcher": []
     },
     {
