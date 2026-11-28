@@ -7,7 +7,7 @@
       "label": "prettify_json",
       "group": "build",
       "type": "shell",
-      "command": "python scripts/prettify_json.py",
+      "command": "python .vscode/prettify_json.py",
       "problemMatcher": [
         "$python"
       ]
@@ -15,13 +15,13 @@
     {
       "label": "install pre-commit hook",
       "type": "shell",
-      "command": "git config core.hooksPath scripts",
+      "command": "git config core.hooksPath .vscode",
       "problemMatcher": []
     },
     {
       "label": "watch_extract_st",
       "type": "shell",
-      "command": "python scripts/watch_extract_st.py",
+      "command": "python .vscode/watch_extract_st.py",
       "isBackground": true,
       "problemMatcher": []
     },
@@ -29,7 +29,7 @@
       "label": "extract_st",
       "group": "build",
       "type": "shell",
-      "command": "python scripts/extract_st.py",
+      "command": "python .vscode/extract_st.py",
       "problemMatcher": [
         "$python"
       ],
@@ -39,7 +39,7 @@
       "label": "update_st",
       "group": "build",
       "type": "shell",
-      "command": "python scripts/update_st.py",
+      "command": "python .vscode/update_st.py",
       "problemMatcher": [
         "$python"
       ],
@@ -48,7 +48,7 @@
     {
       "label": "update_version",
       "type": "shell",
-      "command": "python scripts/update_version.py",
+      "command": "python .vscode/update_version.py",
       "problemMatcher": [
         "$python"
       ]
@@ -56,7 +56,7 @@
     {
       "label": "update_version --dry-run",
       "type": "shell",
-      "command": "python scripts/update_version.py --dry-run",
+      "command": "python .vscode/update_version.py --dry-run",
       "problemMatcher": [
         "$python"
       ]
@@ -64,7 +64,7 @@
     {
       "label": "create_release",
       "type": "shell",
-      "command": "python scripts/create_release.py",
+      "command": "python .vscode/create_release.py",
       "problemMatcher": [
         "$python"
       ]
@@ -72,7 +72,7 @@
     {
       "label": "create_release --dry-run",
       "type": "shell",
-      "command": "python scripts/create_release.py --dry-run",
+      "command": "python .vscode/create_release.py --dry-run",
       "problemMatcher": [
         "$python"
       ]
@@ -81,6 +81,15 @@
       "label": "remove .gitignore",
       "type": "shell",
       "command": "if (Test-Path -LiteralPath .gitignore) { Remove-Item -LiteralPath .gitignore }"
+    },
+    {
+      "label": "run tests",
+      "group": "test",
+      "type": "shell",
+      "command": "python -m unittest discover -v -s .vscode -t .",
+      "problemMatcher": [
+        "$python"
+      ]
     }
   ]
 }
